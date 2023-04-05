@@ -20,7 +20,9 @@ while ($true) {
         if ($process -and $process.Responding) {
 
             # Get the last time the process responded
-            $lastResponded = $process.Responding
+            # $lastResponded = $process.Responding
+            $lastResponded = $process.Responding -and ($process.MainWindowHandle -ne [System.IntPtr]::Zero)
+
             Write-Host "lastResponded $lastResponded..."
             
             # Get the process start time
@@ -30,7 +32,7 @@ while ($true) {
             $idle = (New-TimeSpan -Start $startTime).TotalSeconds
 
             # Check if the process is idle
-            if (!$lastResponded -and $idle -gt $idleTime -and ![System.Windows.Input.Keyboard]::KeyAvailable ) {
+            if (!$lastResponded -and $idle -gt $idleTime -and ![Console]::KeyAvailable) {
                 Write-Host "$application is idle. Setting priority to idle..."
                 # Set the process priority to low
                 $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle
