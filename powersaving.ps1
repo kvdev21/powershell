@@ -1,7 +1,7 @@
 Write-Host "Starting power-saving script..."
 
 # Set the idle time in seconds
-$idleTime = 300
+$idleTime = 60
 Write-Host "Idle time set to $idleTime seconds."
 
 # Specify the list of applications to target
@@ -43,8 +43,8 @@ while ($true) {
         }
     }
 
-    Write-Host "Waiting for 5 minutes..."
-    Start-Sleep -Seconds 300
+    Write-Host "Waiting for 1 minutes..."
+    Start-Sleep -Seconds 60
 }
 
 Write-Host "Power-saving script complete."
