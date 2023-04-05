@@ -29,7 +29,7 @@ while ($true) {
             $idle = (New-TimeSpan -Start $startTime).TotalSeconds
 
             # Check if the process is idle
-            if (!$lastResponded -and $idle -gt $idleTime) {
+            if (!$lastResponded -and $idle -gt $idleTime -and ![System.Windows.Input.Keyboard]::KeyAvailable ) {
                 Write-Host "$application is idle. Setting priority to idle..."
                 # Set the process priority to low
                 $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle
