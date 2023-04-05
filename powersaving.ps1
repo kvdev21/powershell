@@ -21,7 +21,8 @@ while ($true) {
 
             # Get the last time the process responded
             $lastResponded = $process.Responding
-
+            Write-Host "lastResponded $lastResponded..."
+            
             # Get the process start time
             $startTime = $process.StartTime
 
@@ -42,6 +43,8 @@ while ($true) {
             Write-Host "$application is not running."
         }
     }
+
+    Write-Host "idleTime $idle..."
 
     Write-Host "Waiting for 1 minutes..."
     Start-Sleep -Seconds 60
