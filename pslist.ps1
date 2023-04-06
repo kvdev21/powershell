@@ -54,22 +54,28 @@ $btnSave.Location = New-Object System.Drawing.Point(10,120)
 $btnSave.Size = New-Object System.Drawing.Size(75,23)
 $btnSave.Text = "Save"
 $btnSave.Add_Click({
-    $startTime = [datetime]::ParseExact($txtStartTime.Text, "HH:mm", $null)
-    $endTime = [datetime]::ParseExact($txtEndTime.Text, "HH:mm", $null)
+    $startTime = $txtStartTime.Text
+    $endTime = $txtEndTime.Text
     $selectedProcess = $cboProcessList.SelectedItem.ToString()
+    Write-Host "StartTime $startTime..."
+    Write-Host "EndTime $endTime..."
+    Write-Host "Process $selectedProcess..."
+
     while ($true) {
-        $currentTime = Get-Date
-        if ($currentTime.TimeOfDay -ge $startTime.TimeOfDay -and $currentTime.TimeOfDay -lt $endTime.TimeOfDay) {
+        $currentTime = Get-Date -Format "HH:mm"
+        if ($currentTime -ge $startTime -and $currentTime -lt $endTime) {
             $process = Get-Process -Name $selectedProcess
-            $process.PriorityClass = "Idle"
+            $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Idle
+             Write-Host "Going into Idle..."
         } else {
             $process = Get-Process -Name $selectedProcess
-            $process.PriorityClass = "Normal"
+            $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::Normal
+             Write-Host "Going into Normal..."
             break
         }
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 60
     }
 })
 $form.Controls.Add($btnSave)
 
-$form.ShowDialog() | Out
+$form.ShowDialog() | Out-Null
