@@ -5,7 +5,7 @@ $idleTime = 60
 Write-Host "Idle time set to $idleTime seconds."
 
 # Specify the list of applications to target
-$applications = "notepad", "chrome"
+$applications = "notepad"
 Write-Host "Targeting the following applications: $applications"
 
 while ($true) {
