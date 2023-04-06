@@ -4,34 +4,44 @@ Add-Type -AssemblyName System.Drawing
 # Create a form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "Idle Mode"
-$form.Size = New-Object System.Drawing.Size(300,300)
+$form.Size = New-Object System.Drawing.Size(400,300)
 $form.StartPosition = "CenterScreen"
 
 # Create a label for the start time
 $lblStartTime = New-Object System.Windows.Forms.Label
 $lblStartTime.Location = New-Object System.Drawing.Point(10,20)
 $lblStartTime.Size = New-Object System.Drawing.Size(100,20)
-$lblStartTime.Text = "Start Time:"
+$lblStartTime.Text = "Start Time: [HH:mm]"
 $form.Controls.Add($lblStartTime)
 
 # Create a text box for the start time
 $txtStartTime = New-Object System.Windows.Forms.TextBox
 $txtStartTime.Location = New-Object System.Drawing.Point(120,20)
 $txtStartTime.Size = New-Object System.Drawing.Size(100,20)
+$txtStartTime.MaxLength = 5
 $form.Controls.Add($txtStartTime)
+
+# Add a mask to the text box to enforce the format HH:mm
+$txtStartTime.Mask = "00:00"
 
 # Create a label for the end time
 $lblEndTime = New-Object System.Windows.Forms.Label
 $lblEndTime.Location = New-Object System.Drawing.Point(10,50)
 $lblEndTime.Size = New-Object System.Drawing.Size(100,20)
-$lblEndTime.Text = "End Time:"
+$lblEndTime.Text = "End Time: [HH:mm]"
 $form.Controls.Add($lblEndTime)
+
+
 
 # Create a text box for the end time
 $txtEndTime = New-Object System.Windows.Forms.TextBox
 $txtEndTime.Location = New-Object System.Drawing.Point(120,50)
 $txtEndTime.Size = New-Object System.Drawing.Size(100,20)
+$txtEndTime.MaxLength = 5
 $form.Controls.Add($txtEndTime)
+
+# Add a mask to the text box to enforce the format HH:mm
+$txtEndTime.Mask = "00:00"
 
 # Create a label for the process list
 $lblProcessList = New-Object System.Windows.Forms.Label
